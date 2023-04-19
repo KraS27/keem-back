@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KEEM", "KEEM\KEEM.csproj", "{CF8EDEF1-D273-4ABE-8C35-661994452E38}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KEEM_DAL", "KEEM_DAL", "{0A7FEF50-3778-4C1A-A6A5-4072C5FFD8A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KEEM_DAL", "KEEM_DAL\KEEM_DAL.csproj", "{39DD3F48-246E-4DB0-A401-6F8A61285995}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KEEM_Service", "KEEM_Service", "{AA9D412A-AB4B-454A-BF04-54C42F173CDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KEEM_Service", "KEEM_Service\KEEM_Service.csproj", "{8D343952-E618-4C9B-B18A-288C21F77BFE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KEEM_Domain", "KEEM_Domain", "{930B701E-007B-429B-B05A-6D00B05D2739}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KEEM_Domain", "KEEM_Domain\KEEM_Domain.csproj", "{2E4B720B-66E3-494F-8802-7ABD825386D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF8EDEF1-D273-4ABE-8C35-661994452E38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF8EDEF1-D273-4ABE-8C35-661994452E38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF8EDEF1-D273-4ABE-8C35-661994452E38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF8EDEF1-D273-4ABE-8C35-661994452E38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39DD3F48-246E-4DB0-A401-6F8A61285995}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39DD3F48-246E-4DB0-A401-6F8A61285995}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39DD3F48-246E-4DB0-A401-6F8A61285995}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39DD3F48-246E-4DB0-A401-6F8A61285995}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D343952-E618-4C9B-B18A-288C21F77BFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D343952-E618-4C9B-B18A-288C21F77BFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D343952-E618-4C9B-B18A-288C21F77BFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D343952-E618-4C9B-B18A-288C21F77BFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E4B720B-66E3-494F-8802-7ABD825386D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E4B720B-66E3-494F-8802-7ABD825386D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E4B720B-66E3-494F-8802-7ABD825386D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E4B720B-66E3-494F-8802-7ABD825386D2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{39DD3F48-246E-4DB0-A401-6F8A61285995} = {0A7FEF50-3778-4C1A-A6A5-4072C5FFD8A0}
+		{8D343952-E618-4C9B-B18A-288C21F77BFE} = {AA9D412A-AB4B-454A-BF04-54C42F173CDF}
+		{2E4B720B-66E3-494F-8802-7ABD825386D2} = {930B701E-007B-429B-B05A-6D00B05D2739}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B2888C00-2A5C-42C3-9F61-F215FA6AF5CB}
+	EndGlobalSection
+EndGlobal
