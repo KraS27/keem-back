@@ -25,8 +25,8 @@ namespace KEEM_DAL
                 entity.Property(p => p.IdOfUser).HasColumnName("id_of_user");
                 entity.Property(p => p.Type).HasColumnName("Type");
                 entity.Property(p => p.OwnerType).HasColumnName("owner_type");
-                entity.Property(p => p.Latitude).HasColumnName("CoordLat");
-                entity.Property(p => p.Longitude).HasColumnName("CoordLng");
+                entity.Property(p => p.Latitude).HasColumnName("Coord_Lat");
+                entity.Property(p => p.Longitude).HasColumnName("Coord_Lng");
                 entity.Property(p => p.Description).HasColumnName("Description");
                 entity.Property(p => p.NameObject).HasColumnName("Name_Object");
             });
