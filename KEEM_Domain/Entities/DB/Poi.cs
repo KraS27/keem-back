@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace KEEM_Domain.Entities.DB
 {
-    public class POI
+    public class Poi
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public int IdOfUser { get; set; }
 
