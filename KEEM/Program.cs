@@ -1,4 +1,9 @@
 using KEEM_DAL;
+using KEEM_DAL.Implementation;
+using KEEM_DAL.Interfaces;
+using KEEM_Domain.Entities.DB;
+using KEEM_Service.Implementation;
+using KEEM_Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -21,6 +26,9 @@ namespace KEEM
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddScoped <IBaseRepository<Poi>, PoiRepository>();
+            builder.Services.AddScoped <IPoiService, PoiService>();
 
             var app = builder.Build();
 

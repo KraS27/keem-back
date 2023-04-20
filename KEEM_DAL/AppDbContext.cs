@@ -6,7 +6,7 @@ namespace KEEM_DAL
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Poi> pois { get; set; } 
+        public DbSet<Poi> Pois { get; set; } 
 
         public AppDbContext(DbContextOptions options) : base(options)
         {

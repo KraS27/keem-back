@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KEEM_DAL\KEEM_DAL.csproj" />
+  </ItemGroup>
+
 </Project>
