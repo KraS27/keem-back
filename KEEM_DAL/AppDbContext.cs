@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KEEM_DAL
 {
-    internal class ApplicationDbContext : DbContext
+    public class AppDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions options) : base(options)
+        public AppDbContext(DbContextOptions options) : base(options)
         {
 
         }

@@ -1,3 +1,7 @@
+using KEEM_DAL;
+using Microsoft.EntityFrameworkCore;
+using System;
+
 namespace KEEM
 {
     public class Program
@@ -7,6 +11,11 @@ namespace KEEM
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            var connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 25))));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
