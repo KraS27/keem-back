@@ -20,7 +20,8 @@ namespace KEEM_Service.Implementation
         {
             try
             {
-                var pois = await _poiRepository.GetAll().Select(poi => new PoiDTO
+                var pois = await _poiRepository.GetAll()              
+                .Select(poi => new PoiDTO
                 {
                     Id = poi.Id,
                     Latitude = poi.Latitude,
