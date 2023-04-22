@@ -46,7 +46,7 @@ namespace KEEM_DAL
                 entity.Property(e => e.Id).HasColumnName("Id");
                 entity.Property(e => e.Day).HasColumnName("day");
                 entity.Property(e => e.IdElement).HasColumnName("idElement");
-                entity.Property(e => e.IdEnviroment).HasColumnName("idEnviroment");
+                entity.Property(e => e.IdEnvironment).HasColumnName("idEnvironment");
                 entity.Property(e => e.IdPoi).HasColumnName("idPoi");
                 entity.Property(e => e.IdPoligon).HasColumnName("idPoligon");
                 entity.Property(e => e.Measure).HasColumnName("Measure");

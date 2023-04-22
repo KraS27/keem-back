@@ -5,6 +5,6 @@ namespace KEEM_Service.Interfaces
 {
     public interface IPoiService
     {
-        Task<BaseResponse<IEnumerable<PoiDTO>>> GetAllPois();
+        Task<BaseResponse<IEnumerable<PoiDTO>>> GetAllPois(int idEnvironment);
     }
 }

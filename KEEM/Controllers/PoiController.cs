@@ -16,9 +16,9 @@ namespace KEEM.Controllers
         }
 
         [HttpGet("/pois")]
-        public async Task<IActionResult> GetAllPoisAsync()
+        public async Task<IActionResult> GetAllPoisAsync(int idEnvironment)
         {
-            var response = await _poiService.GetAllPois();
+            var response = await _poiService.GetAllPois(idEnvironment);
             return new ObjectResult(response);
         }
     }

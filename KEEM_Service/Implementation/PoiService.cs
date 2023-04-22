@@ -16,18 +16,19 @@ namespace KEEM_Service.Implementation
             _poiRepository = poiRepository;
         }
 
-        public async Task<BaseResponse<IEnumerable<PoiDTO>>> GetAllPois()
+        public async Task<BaseResponse<IEnumerable<PoiDTO>>> GetAllPois(int idEnvironment)
         {
             try
-            {
-                var pois = await _poiRepository.GetAll()              
-                .Select(poi => new PoiDTO
-                {
-                    Id = poi.Id,
-                    Latitude = poi.Latitude,
-                    Longitude = poi.Longitude,
-                    NameObject = poi.NameObject
-                }).ToListAsync();
+            {               
+                var pois = await _poiRepository.GetAll()
+                    .Where(p => p.Emissions.Any(e => e.IdEnvironment == idEnvironment))
+                    .Select(poi => new PoiDTO
+                    {
+                        Id = poi.Id,
+                        Latitude = poi.Latitude,
+                        Longitude = poi.Longitude,
+                        NameObject = poi.NameObject
+                    }).ToListAsync();
 
                 if (pois.Count != 0)
                 {

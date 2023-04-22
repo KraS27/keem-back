@@ -15,7 +15,7 @@ namespace KEEM_Domain.Entities.Models
 
         public int IdElement { get; set; }
 
-        public int IdEnviroment { get; set; }
+        public int IdEnvironment { get; set; }
 
         public int? IdPoi { get; set; }
         public Poi? Poi { get; set; }
