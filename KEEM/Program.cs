@@ -21,6 +21,7 @@ namespace KEEM
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 25))));
 
+            builder.Services.AddCors();
             builder.Services.AddControllers();          
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -36,6 +37,8 @@ namespace KEEM
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseCors(b => b.AllowAnyOrigin());
 
             app.UseHttpsRedirection();
 
