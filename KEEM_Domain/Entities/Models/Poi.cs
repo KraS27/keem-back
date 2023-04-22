@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using KEEM_Domain.Entities.Models;
 
 namespace KEEM_Domain.Entities.DB
 {
@@ -23,5 +19,7 @@ namespace KEEM_Domain.Entities.DB
         public string Description { get; set; }
 
         public string NameObject { get; set; }
+
+        public List<Emission> Emissions { get; set; }
     }
 }
