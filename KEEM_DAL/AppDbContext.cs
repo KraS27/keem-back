@@ -68,7 +68,7 @@ namespace KEEM_DAL
             {
                 entity.HasKey(e => e.Id).HasName("Primary");
 
-                entity.ToTable("emissions_on_map");
+                entity.ToTable("type_of_object");
 
                 entity.Property(e => e.Id).HasColumnName("Id");
                 entity.Property(e => e.ImageName).HasColumnName("Image_Name");

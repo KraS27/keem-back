@@ -21,6 +21,7 @@ namespace KEEM_Service.Implementation
             try
             {               
                 var pois = await _poiRepository.GetAll()
+                    .Include(poi => poi.TypeOfObject)
                     .Where(p => p.Emissions.Any(e => e.IdEnvironment == idEnvironment))
                     .Select(poi => new PoiDTO
                     {
@@ -28,7 +29,8 @@ namespace KEEM_Service.Implementation
                         Latitude = poi.Latitude,
                         Longitude = poi.Longitude,
                         Description = poi.Description,
-                        NameObject = poi.NameObject
+                        NameObject = poi.NameObject,
+                        TypeName = poi.TypeOfObject.Name
                     }).ToListAsync();
 
                 if (pois.Count != 0)

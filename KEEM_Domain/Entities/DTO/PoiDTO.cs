@@ -17,5 +17,7 @@ namespace KEEM_Domain.Entities.DTO
         public string Description { get; set; }
 
         public string NameObject { get; set; }
+
+        public string TypeName { get; set; }
     }
 }
