@@ -32,6 +32,10 @@ namespace KEEM_DAL
                 entity.Property(p => p.Description).HasColumnName("Description");
                 entity.Property(p => p.NameObject).HasColumnName("Name_Object");
 
+                entity.HasOne(p => p.TypeOfObject)
+                .WithMany(t => t.Pois)
+                .HasForeignKey(p => p.Type);
+
                 entity.HasMany(p => p.Emissions)
                 .WithOne(e => e.Poi)
                 .HasForeignKey(e => e.IdPoi);
@@ -58,6 +62,18 @@ namespace KEEM_DAL
                 entity.HasOne(e => e.Poi)
                 .WithMany(p => p.Emissions)
                 .HasForeignKey(e => e.IdPoi);
+            });
+
+            builder.Entity<TypeOfObject>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("Primary");
+
+                entity.ToTable("emissions_on_map");
+
+                entity.Property(e => e.Id).HasColumnName("Id");
+                entity.Property(e => e.ImageName).HasColumnName("Image_Name");
+                entity.Property(e => e.Kved).HasColumnName("kved");
+                entity.Property(e => e.Name).HasColumnName("Name");
             });
         }
     }

@@ -9,6 +9,7 @@ namespace KEEM_Domain.Entities.DB
         public int IdOfUser { get; set; }
 
         public int Type { get; set; }
+        public TypeOfObject TypeOfObject { get; set; }
 
         public int OwnerType { get; set; }
 
