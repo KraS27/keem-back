@@ -27,6 +27,7 @@ namespace KEEM_Service.Implementation
                         Id = poi.Id,
                         Latitude = poi.Latitude,
                         Longitude = poi.Longitude,
+                        Description = poi.Description,
                         NameObject = poi.NameObject
                     }).ToListAsync();
 

@@ -14,6 +14,8 @@ namespace KEEM_Domain.Entities.DTO
 
         public double Longitude { get; set; }
 
+        public string Description { get; set; }
+
         public string NameObject { get; set; }
     }
 }
