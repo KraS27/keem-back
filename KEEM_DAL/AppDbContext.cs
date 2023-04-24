@@ -76,14 +76,21 @@ namespace KEEM_DAL
                 entity.Property(e => e.Name).HasColumnName("Name");
             });
 
-            builder.Entity<TypeOfObject>(entity =>
+            builder.Entity<Element>(entity =>
             {
                 entity.HasKey(e => e.Id).HasName("Primary");
 
                 entity.ToTable("elements");
 
                 entity.Property(e => e.Id).HasColumnName("code");
-                
+                entity.Property(e => e.Cas).HasColumnName("cas");
+                entity.Property(e => e.Formula).HasColumnName("formula");
+                entity.Property(e => e.isHydrocarbon).HasColumnName("hydrocarbon");
+                entity.Property(e => e.Measure).HasColumnName("measure");
+                entity.Property(e => e.Name).HasColumnName("name");
+                entity.Property(e => e.isRigid).HasColumnName("rigid");
+                entity.Property(e => e.ShortName).HasColumnName("short_name");
+                entity.Property(e => e.isVoc).HasColumnName("voc");                          
             });
 
         }

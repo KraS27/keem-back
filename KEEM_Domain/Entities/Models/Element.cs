@@ -24,6 +24,8 @@ namespace KEEM_Domain.Entities.Models
     
         public bool isRigid { get; set; }
 
-        public bool isVoc { get; set; }       
+        public bool isVoc { get; set; }   
+        
+        public Emission Emission { get; set; }
     }
 }
