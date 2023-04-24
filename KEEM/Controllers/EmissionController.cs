@@ -1,4 +1,5 @@
-﻿using KEEM_Service.Interfaces;
+﻿using KEEM_Domain.Entities.DTO;
+using KEEM_Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KEEM.Controllers
@@ -15,10 +16,18 @@ namespace KEEM.Controllers
         }
 
         [HttpGet("/emissions")]
-        public async Task<IActionResult> GetAllEmissionsAsync()
+        public async Task<IActionResult> GetAllEmissionsAsync(int count)
         {
-            var response = await _emissionService.GetAllEmissions();
+            var response = await _emissionService.GetAllEmissions(count);
             return new ObjectResult(response);
         }
+
+        [HttpGet("/emissions/poi")]
+        public async Task<IActionResult> GetEmissionsByPoiAsync(int idPoi)
+        {
+            var response = await _emissionService.GetEmissionsByPoi(idPoi);
+            return new ObjectResult(response);
+        }
+
     }
 }
