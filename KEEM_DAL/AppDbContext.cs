@@ -75,6 +75,17 @@ namespace KEEM_DAL
                 entity.Property(e => e.Kved).HasColumnName("kved");
                 entity.Property(e => e.Name).HasColumnName("Name");
             });
+
+            builder.Entity<TypeOfObject>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("Primary");
+
+                entity.ToTable("elements");
+
+                entity.Property(e => e.Id).HasColumnName("code");
+                
+            });
+
         }
     }
 }

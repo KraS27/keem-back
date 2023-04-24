@@ -28,6 +28,5 @@ namespace KEEM.Controllers
             var response = await _emissionService.GetEmissionsByPoi(idPoi);
             return new ObjectResult(response);
         }
-
     }
 }
