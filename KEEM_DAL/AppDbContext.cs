@@ -62,6 +62,10 @@ namespace KEEM_DAL
                 entity.HasOne(e => e.Poi)
                 .WithMany(p => p.Emissions)
                 .HasForeignKey(e => e.IdPoi);
+
+                entity.HasOne(e => e.Element)
+                .WithMany(e => e.Emissions)
+                .HasForeignKey(e => e.IdElement);
             });
 
             builder.Entity<TypeOfObject>(entity =>

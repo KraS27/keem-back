@@ -22,5 +22,7 @@ namespace KEEM_Domain.Entities.DTO
         public int? Month { get; set; }
 
         public string Measure { get; set; }
+
+        public string ElementName { get; set; }
     }
 }

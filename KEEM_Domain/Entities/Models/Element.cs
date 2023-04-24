@@ -26,6 +26,6 @@ namespace KEEM_Domain.Entities.Models
 
         public bool isVoc { get; set; }   
         
-        public Emission Emission { get; set; }
+        public List<Emission> Emissions { get; set; }
     }
 }

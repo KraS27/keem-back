@@ -14,6 +14,7 @@ namespace KEEM_Domain.Entities.Models
         public int? Day { get; set; }
 
         public int IdElement { get; set; }
+        public Element Element { get; set; }
 
         public int IdEnvironment { get; set; }
 
@@ -26,9 +27,9 @@ namespace KEEM_Domain.Entities.Models
 
         public int? Month { get; set; }
 
-        public double? ValueAvg { get; set; }
+        public double ValueAvg { get; set; }
 
-        public double? ValueMax { get; set; }
+        public double ValueMax { get; set; }
 
         public int Year { get; set; }
     }

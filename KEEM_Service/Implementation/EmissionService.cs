@@ -68,17 +68,19 @@ namespace KEEM_Service.Implementation
         {
             try
             {
-                var emissions = await _emissionRepository.GetAll()      
-                    .Where(e => e.IdPoi == idPoi)
+                var emissions = await _emissionRepository.GetAll()   
+                    .Include(e => e.Element)
+                    .Where(e => e.IdPoi == idPoi)                   
                     .Select(e => new EmissionDTO
                     {
                         Id = e.Id,
                         Day = e.Day,
                         Month = e.Month,
                         Year = e.Year,
-                        ValueAvg = e.ValueAvg,
-                        ValueMax = e.ValueMax,
-                        Measure = e.Measure
+                        ValueAvg = Math.Round(e.ValueAvg, 4),
+                        ValueMax = Math.Round(e.ValueMax, 4),
+                        Measure = e.Measure,
+                        ElementName = e.Element.Name
                     })
                     .ToListAsync();
 
