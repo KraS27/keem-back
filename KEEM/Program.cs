@@ -27,10 +27,11 @@ namespace KEEM
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddScoped<IBaseRepository<Gdk>, GdkRepository>();
             builder.Services.AddScoped<IBaseRepository<Emission>, EmissionRepository>();
-            builder.Services.AddScoped <IBaseRepository<Poi>, PoiRepository>();
-            builder.Services.AddScoped <IPoiService, PoiService>();
-            builder.Services.AddScoped <IEmissionService, EmissionService>();
+            builder.Services.AddScoped<IBaseRepository<Poi>, PoiRepository>();
+            builder.Services.AddScoped<IPoiService, PoiService>();
+            builder.Services.AddScoped<IEmissionService, EmissionService>();
 
             var app = builder.Build();
 

@@ -1,6 +1,7 @@
 ﻿using KEEM_DAL.Interfaces;
 using KEEM_Domain.Entities.DB;
 using KEEM_Domain.Entities.DTO;
+using KEEM_Domain.Entities.Models;
 using KEEM_Domain.Entities.Responses;
 using KEEM_Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -9,17 +10,27 @@ namespace KEEM_Service.Implementation
 {
     public class PoiService : IPoiService
     {
-        private readonly IBaseRepository<Poi> _poiRepository;
+        private readonly IBaseRepository<Poi> _poiRepository; 
+        private readonly IBaseRepository<Gdk> _gdkRepository; 
 
-        public PoiService(IBaseRepository<Poi> poiRepository)
+        public PoiService(IBaseRepository<Poi> poiRepository, IBaseRepository<Gdk> gdkRepository)
         {
             _poiRepository = poiRepository;
+            _gdkRepository = gdkRepository;
         }
 
         public async Task<BaseResponse<IEnumerable<PoiDTO>>> GetAllPois(int idEnvironment)
         {
             try
-            {               
+            {
+                var gdks = await _gdkRepository.GetAll()
+                    .Select(g => new GdkDTO
+                    {
+                        Id = g.Id,
+                        MpcAverage_D = g.MpcAverage_D
+                    })
+                    .ToListAsync();
+
                 var pois = await _poiRepository.GetAll()
                     .Include(poi => poi.TypeOfObject)
                     .Where(p => p.Emissions.Any(e => e.IdEnvironment == idEnvironment))
