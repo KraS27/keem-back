@@ -9,6 +9,7 @@ namespace KEEM_DAL
     {
         public DbSet<Poi> Pois { get; set; } 
         public DbSet<Emission> Emissions { get; set; }
+        public DbSet<Gdk> Gdks { get; set; }
 
         public AppDbContext(DbContextOptions options) : base(options)
         {
@@ -97,6 +98,19 @@ namespace KEEM_DAL
                 entity.Property(e => e.isVoc).HasColumnName("voc");                          
             });
 
+            builder.Entity<Gdk>(entity =>
+            {
+                entity.HasKey(g => g.Id).HasName("Primary");
+
+                entity.ToTable("gdk");
+
+                entity.Property(e => e.Id).HasColumnName("code");
+                entity.Property(e => e.DangerCLass).HasColumnName("danger_class");
+                entity.Property(e => e.Environment).HasColumnName("environment");
+                entity.Property(e => e.MpcAverage_D).HasColumnName("mpc_avrg_d");
+                entity.Property(e => e.MpcM_Ot).HasColumnName("mpc_m_ot");
+                entity.Property(e => e.Tsel).HasColumnName("tsel");
+            });
         }
     }
 }
