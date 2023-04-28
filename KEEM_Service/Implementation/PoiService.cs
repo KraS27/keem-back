@@ -31,8 +31,16 @@ namespace KEEM_Service.Implementation
                         Longitude = poi.Longitude,
                         Description = poi.Description,
                         NameObject = poi.NameObject,
-                        TypeName = poi.TypeOfObject.Name
+                        TypeName = poi.TypeOfObject.Name,
+                        Emissions = poi.Emissions,
                     }).ToListAsync();
+
+                foreach (var poi in pois)
+                {
+                    poi.Emissions = poi.Emissions.GroupBy(e => new { e.Year, e.Month, e.Day })                    
+                        .First()
+                        .ToList();
+                }
 
                 if (pois.Count != 0)
                 {

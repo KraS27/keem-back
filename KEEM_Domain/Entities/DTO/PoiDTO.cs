@@ -14,8 +14,6 @@ namespace KEEM_Domain.Entities.DTO
 
         public string NameObject { get; set; }
 
-        public string TypeName { get; set; }
-
-        public List<Emission> Emissions { get; set; }
+        public string TypeName { get; set; }       
     }
 }
