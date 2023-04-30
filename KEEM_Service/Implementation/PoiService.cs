@@ -23,30 +23,20 @@ namespace KEEM_Service.Implementation
             {               
                 var pois = await _poiRepository.GetAll()
                     .Include(poi => poi.TypeOfObject)
+                    .Include(poi => poi.Emissions)
                     .Where(p => p.Emissions.Any(e => e.IdEnvironment == idEnvironment))
-                    .Select(poi => new PoiDTO
-                    {
-                        Id = poi.Id,
-                        Latitude = poi.Latitude,
-                        Longitude = poi.Longitude,
-                        Description = poi.Description,
-                        NameObject = poi.NameObject,
-                        TypeName = poi.TypeOfObject.Name,
-                        Emissions = poi.Emissions,
-                    }).ToListAsync();
-
-                foreach (var poi in pois)
+                    .ToListAsync();
+             
+                foreach(var poi in pois)
                 {
-                    poi.Emissions = poi.Emissions.GroupBy(e => new { e.Year, e.Month, e.Day })                    
-                        .First()
-                        .ToList();
+                    poi.Emissions = poi.Emissions.GroupBy(e => new { e.Year, e.Month, e.Day }).FirstOrDefault().ToList();
                 }
 
                 if (pois.Count != 0)
                 {
                     return new BaseResponse<IEnumerable<PoiDTO>>
                     {
-                        Data = pois
+                        Data = null
                     };
                 }
                 else

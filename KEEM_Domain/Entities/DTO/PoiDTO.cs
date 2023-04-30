@@ -14,6 +14,8 @@ namespace KEEM_Domain.Entities.DTO
 
         public string NameObject { get; set; }
 
-        public string TypeName { get; set; }       
+        public string TypeName { get; set; }
+
+        public int PollutionLevel { get; set; }
     }
 }
