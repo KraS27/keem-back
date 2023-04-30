@@ -30,7 +30,7 @@ namespace KEEM_Service.Implementation
                     .ToListAsync();
 
                 var gdks = _gdkService.GetAllGdk().Result.Data;
-             
+                                                         
                 var mapPoiToPoiDto =  pois.Select(poi => new PoiDTO
                                         {
                                             Id = poi.Id,
@@ -40,8 +40,8 @@ namespace KEEM_Service.Implementation
                                             TypeName = poi.TypeOfObject.Name,
                                             NameObject = poi.NameObject,
                                             PollutionLevel = poi.Emissions.GroupBy(e => new { e.Year, e.Month, e.Day })
-                                                                          .First()                                            
-                                                                          .Any(e => e.ValueAvg >= gdks.First(g => g.Id == e.IdElement).MpcAverage_D)
+                                                                          .FirstOrDefault()
+                                                                          .Any(e => e?.ValueAvg >= gdks.FirstOrDefault(g => g.Id == e.IdElement)?.MpcAverage_D)
                                         }).ToList();
                 
 
