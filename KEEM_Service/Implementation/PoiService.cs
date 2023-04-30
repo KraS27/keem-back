@@ -39,9 +39,10 @@ namespace KEEM_Service.Implementation
                                             Longitude = poi.Longitude,
                                             TypeName = poi.TypeOfObject.Name,
                                             NameObject = poi.NameObject,
-                                            PollutionLevel = poi.Emissions.GroupBy(e => new { e.Year, e.Month, e.Day })
-                                                                          .FirstOrDefault()
-                                                                          .Any(e => e?.ValueAvg >= gdks.FirstOrDefault(g => g.Id == e.IdElement)?.MpcAverage_D)
+                                            isPolluted = 
+                                            poi.Emissions.GroupBy(e => new { e.Year, e.Month, e.Day })
+                                                        .FirstOrDefault()
+                                                        .Any(e => e?.ValueAvg >= gdks.FirstOrDefault(g => g.Id == e.IdElement)?.MpcAverage_D)
                                         }).ToList();
                 
 
