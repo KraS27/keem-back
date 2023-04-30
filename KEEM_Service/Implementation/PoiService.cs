@@ -30,13 +30,7 @@ namespace KEEM_Service.Implementation
                     .ToListAsync();
 
                 var gdks = _gdkService.GetAllGdk().Result.Data;
-
-
-                foreach(var poi in pois)
-                {
-                    poi.Emissions = poi.Emissions.GroupBy(e => new { e.Year, e.Month, e.Day }).FirstOrDefault().ToList();
-                }
-
+             
                 var mapPoiToPoiDto =  pois.Select(poi => new PoiDTO
                                         {
                                             Id = poi.Id,
@@ -45,12 +39,14 @@ namespace KEEM_Service.Implementation
                                             Longitude = poi.Longitude,
                                             TypeName = poi.TypeOfObject.Name,
                                             NameObject = poi.NameObject,
-                                            PollutionLevel = poi.Emissions.Any(e => e.ValueAvg >= gdks.FirstOrDefault(g => g.Id == e.IdElement).MpcAverage_D)
+                                            PollutionLevel = poi.Emissions.GroupBy(e => new { e.Year, e.Month, e.Day })
+                                                                          .First()                                            
+                                                                          .Any(e => e.ValueAvg >= gdks.First(g => g.Id == e.IdElement).MpcAverage_D)
                                         }).ToList();
                 
 
                 if (pois.Count != 0)
-                    return new BaseResponse<IEnumerable<PoiDTO>>();
+                    return new BaseResponse<IEnumerable<PoiDTO>> { Data = mapPoiToPoiDto };
                 else
                     return new BaseResponse<IEnumerable<PoiDTO>> { Description = "Pois not found" };
                                   
