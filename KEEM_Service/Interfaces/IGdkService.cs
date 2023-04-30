@@ -6,6 +6,6 @@ namespace KEEM_Service.Interfaces
 {
     public interface IGdkService
     {
-        Task<BaseResponse<IEnumerable<GdkDTO>>> GetAllGdk(int idEnvironment);
+        Task<BaseResponse<IEnumerable<GdkDTO>>> GetAllGdk();
     }
 }

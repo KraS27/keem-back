@@ -28,11 +28,26 @@ namespace KEEM_Service.Implementation
                     .Include(poi => poi.Emissions)
                     .Where(p => p.Emissions.Any(e => e.IdEnvironment == idEnvironment))
                     .ToListAsync();
-             
+
+                var gdks = _gdkService.GetAllGdk().Result.Data;
+
+
                 foreach(var poi in pois)
                 {
                     poi.Emissions = poi.Emissions.GroupBy(e => new { e.Year, e.Month, e.Day }).FirstOrDefault().ToList();
                 }
+
+                var mapPoiToPoiDto =  pois.Select(poi => new PoiDTO
+                                        {
+                                            Id = poi.Id,
+                                            Description = poi.Description,
+                                            Latitude = poi.Latitude,
+                                            Longitude = poi.Longitude,
+                                            TypeName = poi.TypeOfObject.Name,
+                                            NameObject = poi.NameObject,
+                                            PollutionLevel = poi.Emissions.Any(e => e.ValueAvg >= gdks.FirstOrDefault(g => g.Id == e.IdElement).MpcAverage_D)
+                                        }).ToList();
+                
 
                 if (pois.Count != 0)
                     return new BaseResponse<IEnumerable<PoiDTO>>();
