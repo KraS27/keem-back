@@ -11,10 +11,12 @@ namespace KEEM_Service.Implementation
     public class PoiService : IPoiService
     {
         private readonly IBaseRepository<Poi> _poiRepository; 
-       
-        public PoiService(IBaseRepository<Poi> poiRepository, IBaseRepository<Gdk> gdkRepository)
+        private readonly IGdkService _gdkService;
+
+        public PoiService(IBaseRepository<Poi> poiRepository, IGdkService gdkService)
         {
-            _poiRepository = poiRepository;           
+            _poiRepository = poiRepository;
+            _gdkService = gdkService;
         }
 
         public async Task<BaseResponse<IEnumerable<PoiDTO>>> GetAllPois(int idEnvironment)
@@ -33,26 +35,15 @@ namespace KEEM_Service.Implementation
                 }
 
                 if (pois.Count != 0)
-                {
-                    return new BaseResponse<IEnumerable<PoiDTO>>
-                    {
-                        Data = null
-                    };
-                }
+                    return new BaseResponse<IEnumerable<PoiDTO>>();
                 else
-                {
-                    return new BaseResponse<IEnumerable<PoiDTO>>
-                    {
-                        Data = null,
-                        Description = "Pois not found"
-                    };
-                }
+                    return new BaseResponse<IEnumerable<PoiDTO>> { Description = "Pois not found" };
+                                  
             }
             catch (Exception ex)
             {
                 return new BaseResponse<IEnumerable<PoiDTO>>
                 {
-                    Data = null,
                     Description = $"[GetAll]: {ex.Message}"
                 };
             }
