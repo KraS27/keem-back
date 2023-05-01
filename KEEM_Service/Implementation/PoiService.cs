@@ -3,13 +3,16 @@ using KEEM_Domain.Entities.DB;
 using KEEM_Domain.Entities.DTO;
 using KEEM_Domain.Entities.Models;
 using KEEM_Domain.Entities.Responses;
+using KEEM_Domain.Extensions;
 using KEEM_Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace KEEM_Service.Implementation
 {
+    
+
     public class PoiService : IPoiService
-    {
+    {       
         private readonly IBaseRepository<Poi> _poiRepository; 
         private readonly IGdkService _gdkService;
 
@@ -18,7 +21,7 @@ namespace KEEM_Service.Implementation
             _poiRepository = poiRepository;
             _gdkService = gdkService;
         }
-
+      
         public async Task<BaseResponse<IEnumerable<PoiDTO>>> GetAllPois(int idEnvironment)
         {
             try
@@ -30,7 +33,7 @@ namespace KEEM_Service.Implementation
                     .ToListAsync();
 
                 var gdks = _gdkService.GetAllGdk().Result.Data;
-                                                         
+                //e => e?.ValueAvg >= gdks.FirstOrDefault(g => g.Id == e.IdElement)?.MpcAverage_D
                 var mapPoiToPoiDto =  pois.Select(poi => new PoiDTO
                                         {
                                             Id = poi.Id,
@@ -39,13 +42,23 @@ namespace KEEM_Service.Implementation
                                             Longitude = poi.Longitude,
                                             TypeName = poi.TypeOfObject.Name,
                                             NameObject = poi.NameObject,
-                                            isPolluted = 
-                                            poi.Emissions.GroupBy(e => new { e.Year, e.Month, e.Day })
+                                            isPolluted = poi.Emissions.GroupBy(e => new { e.Year, e.Month, e.Day })
                                                         .FirstOrDefault()
-                                                        .Any(e => e?.ValueAvg >= gdks.FirstOrDefault(g => g.Id == e.IdElement)?.MpcAverage_D)
-                                        }).ToList();
-                
+                                                        .ToList()
+                                                        .AnyReturnInt(e =>
+                                                        {
+                                                            var elementGdk = gdks.FirstOrDefault(g => g.Id == e.IdElement);
 
+                                                            if (elementGdk == null)
+                                                                return -1;
+                                                            else if (e.ValueAvg >= elementGdk.MpcAverage_D)
+                                                                return 1;
+                                                            else
+                                                                return 0;
+                                                        })
+                                                                                                                                                  
+                                        }).ToList();
+               
                 if (pois.Count != 0)
                     return new BaseResponse<IEnumerable<PoiDTO>> { Data = mapPoiToPoiDto };
                 else
