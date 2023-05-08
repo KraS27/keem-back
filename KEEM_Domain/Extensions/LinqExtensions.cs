@@ -15,10 +15,11 @@ namespace KEEM_Domain.Extensions
         {
             foreach (var e in elements)
             {
-                return checker(e);
+                if (checker(e) != 0)
+                    return checker(e);
             }
 
-            return -1;
+            return 0;
         }
 
     }
