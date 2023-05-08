@@ -4,11 +4,6 @@ using KEEM_Domain.Entities.Models;
 using KEEM_Domain.Entities.Responses;
 using KEEM_Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KEEM_Service.Implementation
 {

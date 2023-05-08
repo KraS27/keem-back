@@ -29,11 +29,11 @@ namespace KEEM_Service.Implementation
                 var pois = await _poiRepository.GetAll()
                     .Include(poi => poi.TypeOfObject)
                     .Include(poi => poi.Emissions)
-                    .Where(p => p.Emissions.Any(e => e.IdEnvironment == idEnvironment))
+                    .Where(p => p.Emissions.Any(e => e.IdEnvironment == idEnvironment))                 
                     .ToListAsync();
 
                 var gdks = _gdkService.GetAllGdk().Result.Data;
-                //e => e?.ValueAvg >= gdks.FirstOrDefault(g => g.Id == e.IdElement)?.MpcAverage_D
+               
                 var mapPoiToPoiDto = 
                     pois.Select(poi => new PoiDTO
                     {
