@@ -111,6 +111,19 @@ namespace KEEM_DAL
                 entity.Property(e => e.MpcM_Ot).HasColumnName("mpc_m_ot");
                 entity.Property(e => e.Tsel).HasColumnName("tsel");
             });
+
+            builder.Entity<User>(entity =>
+            {
+                entity.HasKey(g => g.Id).HasName("Primary");
+
+                entity.ToTable("user");
+
+                entity.Property(e => e.Id).HasColumnName("id_of_user");
+                entity.Property(e => e.IdOfExpert).HasColumnName("if_of_expert");
+                entity.Property(e => e.UserName).HasColumnName("user_name");
+                entity.Property(e => e.Description).HasColumnName("description");
+                entity.Property(e => e.Password).HasColumnName("password");
+            });
         }
     }
 }
