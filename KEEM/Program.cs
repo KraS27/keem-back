@@ -7,6 +7,7 @@ using KEEM_Service.Implementation;
 using KEEM_Service.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using System.Security;
 
 namespace KEEM
 {
@@ -25,11 +26,17 @@ namespace KEEM
 
             builder.Services.AddCors();
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => options.LoginPath = "/login");
+                .AddCookie(options => 
+                {
+                    options.LoginPath = "/login";
+                    options.Cookie.SameSite = SameSiteMode.None;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                });
             builder.Services.AddControllers();          
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+           
             builder.Services.AddScoped<IBaseRepository<Gdk>, GdkRepository>();
             builder.Services.AddScoped<IBaseRepository<Emission>, EmissionRepository>();
             builder.Services.AddScoped<IBaseRepository<Poi>, PoiRepository>();
@@ -49,7 +56,13 @@ namespace KEEM
                 app.UseSwaggerUI();
             }
 
-            app.UseCors(b => b.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            app.UseCors(s =>
+            {
+                s.WithOrigins("http://localhost:3000", "https://localhost:7199");
+                s.AllowAnyHeader();
+                s.AllowAnyMethod();
+                s.AllowCredentials();               
+            });
 
             app.UseHttpsRedirection();
 
