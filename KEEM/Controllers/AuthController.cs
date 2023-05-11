@@ -27,5 +27,12 @@ namespace KEEM.Controllers
             var response = await _authService.LogOut(HttpContext);
             return new ObjectResult(response);
         }
+
+        [HttpGet("/auth")]
+        public async Task<IActionResult> IsAuthenticate()
+        {
+            var response = await _authService.IsAuthenticate(HttpContext);
+            return new ObjectResult(response);
+        }
     }
 }

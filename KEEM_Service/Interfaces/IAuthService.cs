@@ -13,5 +13,7 @@ namespace KEEM_Service.Interfaces
         Task<BaseResponse<bool>> Login(string login, string password, HttpContext context);
 
         Task<BaseResponse<bool>> LogOut(HttpContext context);
+
+        Task<BaseResponse<bool>> IsAuthenticate(HttpContext context);
     }
 }

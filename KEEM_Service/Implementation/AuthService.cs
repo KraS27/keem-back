@@ -24,6 +24,22 @@ namespace KEEM_Service.Implementation
             _userRepository = userRepository;
         }
 
+        public async Task<BaseResponse<bool>> IsAuthenticate(HttpContext context)
+        {
+            try
+            {
+                var user = context.User.Identity;
+                if (user is not null && user.IsAuthenticated)
+                    return new BaseResponse<bool> { Data = true };
+                else
+                    return new BaseResponse<bool> { Data = false };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<bool> { Data = false, Description = $"[IsAuthenticate]: {ex.Message}" };
+            }
+        }
+
         public async Task<BaseResponse<bool>> Login(string login, string password, HttpContext context)
         {
             try
