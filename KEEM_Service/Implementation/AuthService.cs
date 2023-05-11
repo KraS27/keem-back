@@ -38,6 +38,7 @@ namespace KEEM_Service.Implementation
                     ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
                     
                     await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+
                     return new BaseResponse<bool> { Data = true };
                 }                             
                 else  
