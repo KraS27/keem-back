@@ -10,6 +10,7 @@ namespace KEEM_DAL
         public DbSet<Poi> Pois { get; set; } 
         public DbSet<Emission> Emissions { get; set; }
         public DbSet<Gdk> Gdks { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public AppDbContext(DbContextOptions options) : base(options)
         {

@@ -5,6 +5,7 @@ using KEEM_Domain.Entities.DB;
 using KEEM_Domain.Entities.Models;
 using KEEM_Service.Implementation;
 using KEEM_Service.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 namespace KEEM
@@ -23,6 +24,7 @@ namespace KEEM
                 options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 25))));
 
             builder.Services.AddCors();
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
             builder.Services.AddControllers();          
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -48,6 +50,7 @@ namespace KEEM
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
