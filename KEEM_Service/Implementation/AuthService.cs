@@ -49,5 +49,19 @@ namespace KEEM_Service.Implementation
                 return new BaseResponse<bool> { Data = false, Description = $"[Login]: {ex.Message}" };
             }
         }
+
+        public async Task<BaseResponse<bool>> LogOut(HttpContext context)
+        {
+            try
+            {
+                await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+                return new BaseResponse<bool> { Data = true};
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<bool> { Data = true, Description = $"[LogOut]: {ex.Message}" };
+            }
+        }
     }
 }

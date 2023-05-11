@@ -11,5 +11,7 @@ namespace KEEM_Service.Interfaces
     public interface IAuthService
     {
         Task<BaseResponse<bool>> Login(string login, string password, HttpContext context);
+
+        Task<BaseResponse<bool>> LogOut(HttpContext context);
     }
 }
