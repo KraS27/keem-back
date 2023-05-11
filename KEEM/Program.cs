@@ -49,7 +49,7 @@ namespace KEEM
                 app.UseSwaggerUI();
             }
 
-            app.UseCors(b => b.AllowAnyOrigin());
+            app.UseCors(b => b.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseHttpsRedirection();
 

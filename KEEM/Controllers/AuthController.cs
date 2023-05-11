@@ -14,14 +14,14 @@ namespace KEEM.Controllers
             _authService = authService;
         }
 
-        [HttpGet("/login")]
+        [HttpPost("/login")]
         public async Task<IActionResult> Login(string userName, string password)
         {
             var response = await _authService.Login(userName, password, HttpContext);
             return new ObjectResult(response);
         }
 
-        [HttpGet("/logout")]
+        [HttpDelete("/logout")]
         public async Task<IActionResult> LogOut()
         {
             var response = await _authService.LogOut(HttpContext);
