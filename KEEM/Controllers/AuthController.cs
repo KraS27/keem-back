@@ -5,7 +5,7 @@ namespace KEEM.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AuthController
+    public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
 
@@ -15,9 +15,9 @@ namespace KEEM.Controllers
         }
 
         [HttpPost("/login")]
-        public async Task<IActionResult> Login(string userName, string password, HttpContext context)
+        public async Task<IActionResult> Login(string userName, string password)
         {
-            var response = await _authService.Login(userName, password, context);
+            var response = await _authService.Login(userName, password, HttpContext);
             return new ObjectResult(response);
         }
     }

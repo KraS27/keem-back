@@ -120,7 +120,7 @@ namespace KEEM_DAL
                 entity.ToTable("user");
 
                 entity.Property(e => e.Id).HasColumnName("id_of_user");
-                entity.Property(e => e.IdOfExpert).HasColumnName("if_of_expert");
+                entity.Property(e => e.IdOfExpert).HasColumnName("id_of_expert");
                 entity.Property(e => e.UserName).HasColumnName("user_name");
                 entity.Property(e => e.Description).HasColumnName("description");
                 entity.Property(e => e.Password).HasColumnName("password");

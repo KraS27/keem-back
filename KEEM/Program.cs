@@ -24,7 +24,8 @@ namespace KEEM
                 options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 25))));
 
             builder.Services.AddCors();
-            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => options.LoginPath = "/login");
             builder.Services.AddControllers();          
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
