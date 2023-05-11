@@ -14,7 +14,7 @@ namespace KEEM.Controllers
             _authService = authService;
         }
 
-        [HttpPost("/login")]
+        [HttpGet("/login")]
         public async Task<IActionResult> Login(string userName, string password)
         {
             var response = await _authService.Login(userName, password, HttpContext);
