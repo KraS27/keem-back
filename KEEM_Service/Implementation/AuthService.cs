@@ -24,23 +24,23 @@ namespace KEEM_Service.Implementation
             _userRepository = userRepository;
         }
 
-        public async Task<BaseResponse<bool>> IsAuthenticate(HttpContext context)
+        public async Task<AuthResponse> IsAuthenticate(HttpContext context)
         {
             try
             {
                 var user = context.User.Identity;
                 if (user is not null && user.IsAuthenticated)
-                    return new BaseResponse<bool> { Data = true };
+                    return new AuthResponse { Data = true };
                 else
-                    return new BaseResponse<bool> { Data = false };
+                    return new AuthResponse { Data = false };
             }
             catch (Exception ex)
             {
-                return new BaseResponse<bool> { Data = false, Description = $"[IsAuthenticate]: {ex.Message}" };
+                return new AuthResponse { Data = false, Description = $"[IsAuthenticate]: {ex.Message}" };
             }
         }
 
-        public async Task<BaseResponse<bool>> Login(string login, string password, HttpContext context)
+        public async Task<AuthResponse> Login(string login, string password, HttpContext context)
         {
             try
             {
@@ -55,18 +55,18 @@ namespace KEEM_Service.Implementation
                     
                     await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                    return new BaseResponse<bool> { Data = true };
+                    return new AuthResponse{ Data = true,  };
                 }                             
                 else  
-                    return new BaseResponse<bool> { Data= false, Description = "User not Found" }; 
+                    return new AuthResponse{ Data= false, Description = "User not Found" }; 
             }
             catch(Exception ex)
             {
-                return new BaseResponse<bool> { Data = false, Description = $"[Login]: {ex.Message}" };
+                return new AuthResponse { Data = false, Description = $"[Login]: {ex.Message}" };
             }
         }
 
-        public async Task<BaseResponse<bool>> LogOut(HttpContext context)
+        public async Task<AuthResponse> LogOut(HttpContext context)
         {
             try
             {
