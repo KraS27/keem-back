@@ -72,11 +72,11 @@ namespace KEEM_Service.Implementation
             {
                 await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-                return new BaseResponse<bool> { Data = true};
+                return new AuthResponse { Data = true};
             }
             catch (Exception ex)
             {
-                return new BaseResponse<bool> { Data = true, Description = $"[LogOut]: {ex.Message}" };
+                return new AuthResponse { Data = true, Description = $"[LogOut]: {ex.Message}" };
             }
         }
         
