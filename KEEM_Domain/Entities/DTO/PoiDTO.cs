@@ -6,6 +6,10 @@ namespace KEEM_Domain.Entities.DTO
     {
         public int Id { get; set; }
 
+        public int IdOfUser { get; set; }
+
+        public int OwnerType { get; set; }
+
         public double Latitude { get; set; }
 
         public double Longitude { get; set; }

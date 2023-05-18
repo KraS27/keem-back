@@ -12,9 +12,10 @@ namespace KEEM_DAL.Implementation
             _appDbContext = appDbContext;
         }
 
-        public Task Create(Poi entity)
+        public async Task Create(Poi entity)
         {
-            throw new NotImplementedException();
+            await _appDbContext.Pois.AddAsync(entity);
+            await _appDbContext.SaveChangesAsync();        
         }
 
         public Task Delete(Poi entity)

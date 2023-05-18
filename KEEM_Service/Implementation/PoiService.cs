@@ -21,7 +21,30 @@ namespace KEEM_Service.Implementation
             _poiRepository = poiRepository;
             _gdkService = gdkService;
         }
-      
+
+        public async Task<BaseResponse<bool>> AddPoi(PoiDTO poiDTO)
+        {
+            try
+            {
+                await _poiRepository.Create(new Poi
+                {
+                    IdOfUser = poiDTO.IdOfUser,
+                    Type = 2,
+                    OwnerType = poiDTO.OwnerType,
+                    Latitude = poiDTO.Latitude,
+                    Longitude = poiDTO.Longitude,
+                    Description = poiDTO.Description,
+                    NameObject = poiDTO.NameObject,
+                });
+
+                return new BaseResponse<bool> { Data = true };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<bool> { Data = false, Description = $"[AddPoi]: {ex.Message}" };
+            }
+        }
+
         public async Task<BaseResponse<IEnumerable<PoiDTO>>> GetAllPois(int idEnvironment)
         {
             try
@@ -38,6 +61,8 @@ namespace KEEM_Service.Implementation
                     pois.Select(poi => new PoiDTO
                     {
                         Id = poi.Id,
+                        IdOfUser = poi.IdOfUser,
+                        OwnerType = poi.OwnerType,
                         Description = poi.Description,
                         Latitude = poi.Latitude,
                         Longitude = poi.Longitude,
