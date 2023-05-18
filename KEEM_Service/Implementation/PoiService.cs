@@ -29,7 +29,7 @@ namespace KEEM_Service.Implementation
                 await _poiRepository.Create(new Poi
                 {
                     IdOfUser = poiDTO.IdOfUser,
-                    Type = 2,
+                    Type = 273,
                     OwnerType = poiDTO.OwnerType,
                     Latitude = poiDTO.Latitude,
                     Longitude = poiDTO.Longitude,
