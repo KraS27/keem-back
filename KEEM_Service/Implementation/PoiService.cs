@@ -51,13 +51,11 @@ namespace KEEM_Service.Implementation
             {               
                 var pois = await _poiRepository.GetAll()
                     .Include(poi => poi.TypeOfObject)
-                    .Include(poi => poi.Emissions)
-                    .Where(p => p.Emissions.Any(e => e.IdEnvironment == idEnvironment))                 
+                    .Include(poi => poi.Emissions)                   
+                    .Where(p => p.Emissions.Any(e => e.IdEnvironment == idEnvironment) || p.Emissions.Count == 0)                      
                     .ToListAsync();
 
-                var gdks = _gdkService.GetAllGdk().Result.Data;
-               
-                var mapPoiToPoiDto = 
+                var mapPoiToPoiDto =
                     pois.Select(poi => new PoiDTO
                     {
                         Id = poi.Id,
@@ -68,21 +66,7 @@ namespace KEEM_Service.Implementation
                         Longitude = poi.Longitude,
                         TypeName = poi.TypeOfObject.Name,
                         NameObject = poi.NameObject,
-                        isPolluted = 
-                        poi.Emissions.GroupBy(e => new { e.Year, e.Month, e.Day })
-                        .First()
-                        .ToList()
-                        .AnyReturnInt(e =>
-                        {
-                            var elementGdk = gdks.FirstOrDefault(g => g.Id == e.IdElement);
-
-                            if (elementGdk == null)
-                                return -1;
-                            else if (e.ValueAvg >= elementGdk.MpcAverage_D)
-                                return 1;
-                            else
-                                return 0;
-                        })                                                                                                                                                  
+                        isPolluted = CheckIsPoluted(poi.Emissions)
                     }).ToList();
                
                 if (pois.Count != 0)
@@ -98,6 +82,30 @@ namespace KEEM_Service.Implementation
                     Description = $"[GetAll]: {ex.Message}"
                 };
             }
+        }
+
+        private int CheckIsPoluted(List<Emission> emissions)
+        {
+            var gdks = _gdkService.GetAllGdk().Result.Data;
+
+            if(emissions.Count != 0) 
+            {
+                return emissions.GroupBy(e => new { e.Year, e.Month, e.Day })
+                    .First()
+                    .ToList()
+                    .AnyReturnInt(e =>
+                    {
+                        var elementGdk = gdks.FirstOrDefault(g => g.Id == e.IdElement);
+
+                        if (elementGdk == null || e == null)
+                            return -1;
+                        else if (e.ValueAvg >= elementGdk.MpcAverage_D)
+                            return 1;
+                        else
+                            return 0;
+                    });
+            }
+            else { return -1; }
         }
     }
 }
