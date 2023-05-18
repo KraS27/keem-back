@@ -52,7 +52,7 @@ namespace KEEM_Service.Implementation
                 var pois = await _poiRepository.GetAll()
                     .Include(poi => poi.TypeOfObject)
                     .Include(poi => poi.Emissions)                   
-                    .Where(p => p.Emissions.Any(e => e.IdEnvironment == idEnvironment) || p.Emissions.Count == 0)                      
+                    .Where(p => p.Emissions.Any(e => e.IdEnvironment == idEnvironment))                      
                     .ToListAsync();
 
                 var mapPoiToPoiDto =
@@ -97,7 +97,7 @@ namespace KEEM_Service.Implementation
                     {
                         var elementGdk = gdks.FirstOrDefault(g => g.Id == e.IdElement);
 
-                        if (elementGdk == null || e == null)
+                        if (elementGdk == null)
                             return -1;
                         else if (e.ValueAvg >= elementGdk.MpcAverage_D)
                             return 1;
