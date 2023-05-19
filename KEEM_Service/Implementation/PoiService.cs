@@ -49,14 +49,16 @@ namespace KEEM_Service.Implementation
         {
             try
             {               
-                var pois = await _poiRepository.GetAll()
-                    .Include(poi => poi.TypeOfObject)
-                    .Include(poi => poi.Emissions)                   
-                    .Where(p => p.Emissions.Any(e => e.IdEnvironment == idEnvironment))                      
-                    .ToListAsync();
+                if(idEnvironment == 0)
+                {
+                    var poisWithoutEmissions = await _poiRepository.GetAll()
+                        .Include(poi => poi.TypeOfObject)
+                        .Include(poi => poi.Emissions)
+                        .Where(p => p.Emissions.Count == 0)
+                        .ToListAsync();
 
-                var mapPoiToPoiDto =
-                    pois.Select(poi => new PoiDTO
+                    var poisWithoutEmissionsDTO =
+                    poisWithoutEmissions.Select(poi => new PoiDTO
                     {
                         Id = poi.Id,
                         IdOfUser = poi.IdOfUser,
@@ -66,14 +68,41 @@ namespace KEEM_Service.Implementation
                         Longitude = poi.Longitude,
                         TypeName = poi.TypeOfObject.Name,
                         NameObject = poi.NameObject,
-                        isPolluted = CheckIsPoluted(poi.Emissions)
+                        isPolluted = -1
                     }).ToList();
-               
-                if (pois.Count != 0)
-                    return new BaseResponse<IEnumerable<PoiDTO>> { Data = mapPoiToPoiDto };
+
+                    if (poisWithoutEmissionsDTO.Count != 0)
+                        return new BaseResponse<IEnumerable<PoiDTO>> { Data = poisWithoutEmissionsDTO };
+                    else
+                        return new BaseResponse<IEnumerable<PoiDTO>> { Description = "Pois not found" };
+                }
                 else
-                    return new BaseResponse<IEnumerable<PoiDTO>> { Description = "Pois not found" };
-                                  
+                {
+                    var pois = await _poiRepository.GetAll()
+                   .Include(poi => poi.TypeOfObject)
+                   .Include(poi => poi.Emissions)
+                   .Where(p => p.Emissions.Any(e => e.IdEnvironment == idEnvironment))
+                   .ToListAsync();
+
+                    var poisDto =
+                        pois.Select(poi => new PoiDTO
+                        {
+                            Id = poi.Id,
+                            IdOfUser = poi.IdOfUser,
+                            OwnerType = poi.OwnerType,
+                            Description = poi.Description,
+                            Latitude = poi.Latitude,
+                            Longitude = poi.Longitude,
+                            TypeName = poi.TypeOfObject.Name,
+                            NameObject = poi.NameObject,
+                            isPolluted = CheckIsPoluted(poi.Emissions)
+                        }).ToList();
+
+                    if (poisDto.Count != 0)
+                        return new BaseResponse<IEnumerable<PoiDTO>> { Data = poisDto };
+                    else
+                        return new BaseResponse<IEnumerable<PoiDTO>> { Description = "Pois not found" };
+                }                                                 
             }
             catch (Exception ex)
             {
