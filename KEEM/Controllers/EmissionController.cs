@@ -22,6 +22,13 @@ namespace KEEM.Controllers
             return new ObjectResult(response);
         }
 
+        [HttpPost("/emissions")]
+        public async Task<IActionResult> AddEmission(EmissionDTO emissionDTO)
+        {
+            var response = await _emissionService.AddEmissionToPoi(emissionDTO);
+            return new ObjectResult(response);
+        }
+
         [HttpGet("/emissions/poi")]
         public async Task<IActionResult> GetEmissionsByPoiAsync(int idPoi)
         {

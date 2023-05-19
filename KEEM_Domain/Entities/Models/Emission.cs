@@ -21,7 +21,7 @@ namespace KEEM_Domain.Entities.Models
         public int? IdPoi { get; set; }
         public Poi? Poi { get; set; }
 
-        public int IdPoligon { get; set; }
+        public int? IdPoligon { get; set; }
 
         public string Measure { get; set; }
 

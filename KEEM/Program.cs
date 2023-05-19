@@ -41,10 +41,12 @@ namespace KEEM
             builder.Services.AddScoped<IBaseRepository<Emission>, EmissionRepository>();
             builder.Services.AddScoped<IBaseRepository<Poi>, PoiRepository>();
             builder.Services.AddScoped<IBaseRepository<User> , UserRepository>();
+            builder.Services.AddScoped<IBaseRepository<Element> , ElementRepository>();
             builder.Services.AddScoped<IGdkService, GdkService>();
             builder.Services.AddScoped<IPoiService, PoiService>();
             builder.Services.AddScoped<IEmissionService, EmissionService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<IElementService, ElementService>();
             
 
             var app = builder.Build();

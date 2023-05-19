@@ -10,16 +10,31 @@ namespace KEEM_Service.Implementation
     public class EmissionService : IEmissionService
     {
         private readonly IBaseRepository<Emission> _emissionRepository;
+        private readonly IElementService _elementService;
 
-        public EmissionService(IBaseRepository<Emission> emissionRepository)
+        public EmissionService(IBaseRepository<Emission> emissionRepository, IElementService elementService)
         {
             _emissionRepository = emissionRepository;
+            _elementService = elementService;
         }
 
-        public async Task<BaseResponse<bool>> AddEmissionToMarker(EmissionDTO emissionDTO)
+        public async Task<BaseResponse<bool>> AddEmissionToPoi(EmissionDTO emissionDTO)
         {
             try
-            {
+            {              
+                await _emissionRepository.Create(new Emission
+                {
+                    IdElement = _elementService.GetElementByName(emissionDTO.ElementName).Result.Id,
+                    IdEnvironment = emissionDTO.IdEnvironment,
+                    IdPoi = emissionDTO.IdPoi,
+                    Day = emissionDTO.Day,
+                    Month = emissionDTO.Month,
+                    Year = emissionDTO.Year,
+                    Measure = emissionDTO.Measure,
+                    ValueAvg = emissionDTO.ValueAvg,
+                    ValueMax = emissionDTO.ValueMax,                  
+                });
+
                 return new BaseResponse<bool> { Data= true };
             }
             catch(Exception ex)
@@ -42,7 +57,8 @@ namespace KEEM_Service.Implementation
                         Year = e.Year,
                         ValueAvg= e.ValueAvg,
                         ValueMax= e.ValueMax,
-                        Measure = e.Measure
+                        Measure = e.Measure,
+                        IdEnvironment= e.IdEnvironment,
                     })
                     .ToListAsync();
 
@@ -87,6 +103,7 @@ namespace KEEM_Service.Implementation
                         ValueAvg = Math.Round(e.ValueAvg, 4),
                         ValueMax = Math.Round(e.ValueMax, 4),
                         Measure = e.Measure,
+                        IdEnvironment = e.IdEnvironment,
                         ElementName = e.Element.Name
                     })
                     .ToListAsync();

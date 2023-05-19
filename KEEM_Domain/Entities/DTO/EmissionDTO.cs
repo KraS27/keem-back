@@ -13,15 +13,19 @@ namespace KEEM_Domain.Entities.DTO
 
         public int? Day { get; set; }
         
-        public double? ValueAvg { get; set; }
+        public double ValueAvg { get; set; }
 
-        public double? ValueMax { get; set; }
+        public double ValueMax { get; set; }
 
         public int Year { get; set; }
 
         public int? Month { get; set; }
 
         public string Measure { get; set; }
+
+        public int? IdPoi { get; set; }
+
+        public int IdEnvironment { get; set; }
 
         public string ElementName { get; set; }
     }
