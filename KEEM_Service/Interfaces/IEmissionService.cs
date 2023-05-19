@@ -10,6 +10,6 @@ namespace KEEM_Service.Interfaces
 
         Task<BaseResponse<IEnumerable<EmissionDTO>>> GetEmissionsByPoi(int idPoi);
 
-        Task<BaseResponse<bool>> AddEmissionToPoi(EmissionDTO emissionDTO);
+        Task<BaseResponse<bool>> AddEmissionToPoi(CreatingEmissionDTO emissionDTO);
     }
 }

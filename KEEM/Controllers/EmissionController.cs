@@ -23,7 +23,7 @@ namespace KEEM.Controllers
         }
 
         [HttpPost("/emissions")]
-        public async Task<IActionResult> AddEmission(EmissionDTO emissionDTO)
+        public async Task<IActionResult> AddEmission(CreatingEmissionDTO emissionDTO)
         {
             var response = await _emissionService.AddEmissionToPoi(emissionDTO);
             return new ObjectResult(response);

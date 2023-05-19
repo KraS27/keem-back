@@ -18,7 +18,7 @@ namespace KEEM_Service.Implementation
             _elementService = elementService;
         }
 
-        public async Task<BaseResponse<bool>> AddEmissionToPoi(EmissionDTO emissionDTO)
+        public async Task<BaseResponse<bool>> AddEmissionToPoi(CreatingEmissionDTO emissionDTO)
         {
             try
             {              
@@ -57,8 +57,8 @@ namespace KEEM_Service.Implementation
                         Year = e.Year,
                         ValueAvg= e.ValueAvg,
                         ValueMax= e.ValueMax,
-                        Measure = e.Measure,
-                        IdEnvironment= e.IdEnvironment,
+                        Measure = e.Measure,  
+                        ElementName = e.Element.Name
                     })
                     .ToListAsync();
 
@@ -102,8 +102,7 @@ namespace KEEM_Service.Implementation
                         Year = e.Year,
                         ValueAvg = Math.Round(e.ValueAvg, 4),
                         ValueMax = Math.Round(e.ValueMax, 4),
-                        Measure = e.Measure,
-                        IdEnvironment = e.IdEnvironment,
+                        Measure = e.Measure,                      
                         ElementName = e.Element.Name
                     })
                     .ToListAsync();
