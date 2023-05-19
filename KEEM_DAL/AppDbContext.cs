@@ -11,6 +11,7 @@ namespace KEEM_DAL
         public DbSet<Emission> Emissions { get; set; }
         public DbSet<Gdk> Gdks { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Element> Elements { get; set; }
 
         public AppDbContext(DbContextOptions options) : base(options)
         {

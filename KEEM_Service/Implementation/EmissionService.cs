@@ -16,6 +16,18 @@ namespace KEEM_Service.Implementation
             _emissionRepository = emissionRepository;
         }
 
+        public async Task<BaseResponse<bool>> AddEmissionToMarker(EmissionDTO emissionDTO)
+        {
+            try
+            {
+                return new BaseResponse<bool> { Data= true };
+            }
+            catch(Exception ex)
+            {
+                return new BaseResponse<bool> { Data= false, Description = $"[AddEmissionToMarker]: {ex.Message}" };
+            }
+        }
+
         public async Task<BaseResponse<IEnumerable<EmissionDTO>>> GetAllEmissions(int count)
         {            
             try
