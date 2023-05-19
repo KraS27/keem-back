@@ -12,9 +12,10 @@ namespace KEEM_DAL.Implementation
             _dbContext = dbContext;
         }
 
-        public Task Create(Emission entity)
+        public async Task Create(Emission entity)
         {
-            throw new NotImplementedException();
+            await _dbContext.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
         public Task Delete(Emission entity)

@@ -9,5 +9,7 @@ namespace KEEM_Service.Interfaces
         Task<BaseResponse<IEnumerable<EmissionDTO>>> GetAllEmissions(int count = 300);
 
         Task<BaseResponse<IEnumerable<EmissionDTO>>> GetEmissionsByPoi(int idPoi);
+
+        Task<BaseResponse<bool>> AddEmissionToMarker(EmissionDTO emissionDTO);
     }
 }
