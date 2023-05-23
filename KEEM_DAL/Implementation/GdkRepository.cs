@@ -22,6 +22,11 @@ namespace KEEM_DAL.Implementation
             throw new NotImplementedException();
         }
 
+        public Task CreateRange(IEnumerable<Gdk> entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task Delete(Gdk entity)
         {
             throw new NotImplementedException();

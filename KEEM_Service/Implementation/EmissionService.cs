@@ -22,7 +22,7 @@ namespace KEEM_Service.Implementation
         {
             try
             {
-                throw new NotImplementedException();
+                await _emissionRepository.CreateRange()
             }
             catch(Exception ex)
             {
