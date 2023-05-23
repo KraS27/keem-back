@@ -18,6 +18,12 @@ namespace KEEM_DAL.Implementation
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task CreateRange(List<Emission> emissions)
+        {
+            await _dbContext.AddRangeAsync(emissions);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public Task Delete(Emission entity)
         {
             throw new NotImplementedException();

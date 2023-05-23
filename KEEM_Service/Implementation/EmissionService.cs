@@ -18,6 +18,18 @@ namespace KEEM_Service.Implementation
             _elementService = elementService;
         }
 
+        public async Task<BaseResponse<bool>> AddEmissionsToPoi(List<CreatingEmissionDTO> emissionDTO)
+        {
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch(Exception ex)
+            {
+                return new BaseResponse<bool> { Data = false, Description = $"[AddEmissionToMarker]: {ex.Message}" };
+            }
+        }
+
         public async Task<BaseResponse<bool>> AddEmissionToPoi(CreatingEmissionDTO emissionDTO)
         {
             try
