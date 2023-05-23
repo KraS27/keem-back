@@ -22,7 +22,22 @@ namespace KEEM_Service.Implementation
         {
             try
             {
-                await _emissionRepository.CreateRange()
+                var emissions = emissionDTO.Select(e => new Emission
+                {
+                    IdElement = _elementService.GetElementByName(e.ElementName).Result.Id,
+                    IdEnvironment = e.IdEnvironment,
+                    IdPoi = e.IdPoi,
+                    Day = e.Day,
+                    Month = e.Month,
+                    Year = e.Year,
+                    Measure = e.Measure,
+                    ValueAvg = e.ValueAvg,
+                    ValueMax = e.ValueMax,
+                }).ToList();
+
+                await _emissionRepository.CreateRange(emissions);
+
+                return new BaseResponse<bool> { Data= true };
             }
             catch(Exception ex)
             {

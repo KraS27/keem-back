@@ -10,7 +10,7 @@ namespace KEEM_DAL.Interfaces
     {
         Task Create(T entity);
 
-        Task CreateRange(IEnumerable<T> entity);
+        Task CreateRange(IEnumerable<T> entities);
 
         IQueryable<T> GetAll();
 
