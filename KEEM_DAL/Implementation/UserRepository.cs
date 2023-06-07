@@ -22,11 +22,6 @@ namespace KEEM_DAL.Implementation
             throw new NotImplementedException();
         }
 
-        public Task CreateRange(IEnumerable<User> entity)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task Delete(User entity)
         {
             throw new NotImplementedException();

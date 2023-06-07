@@ -17,12 +17,7 @@ namespace KEEM_DAL.Implementation
             await _appDbContext.Pois.AddAsync(entity);
             await _appDbContext.SaveChangesAsync();        
         }
-
-        public Task CreateRange(IEnumerable<Poi> entity)
-        {
-            throw new NotImplementedException();
-        }
-
+      
         public Task Delete(Poi entity)
         {
             throw new NotImplementedException();
