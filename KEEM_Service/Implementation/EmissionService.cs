@@ -9,10 +9,10 @@ namespace KEEM_Service.Implementation
 {
     public class EmissionService : IEmissionService
     {
-        private readonly IBaseRepository<Emission> _emissionRepository;
+        private readonly IEmissionRepository _emissionRepository;
         private readonly IElementService _elementService;
 
-        public EmissionService(IBaseRepository<Emission> emissionRepository, IElementService elementService)
+        public EmissionService(IEmissionRepository emissionRepository, IElementService elementService)
         {
             _emissionRepository = emissionRepository;
             _elementService = elementService;

@@ -3,7 +3,7 @@ using KEEM_Domain.Entities.Models;
 
 namespace KEEM_DAL.Implementation
 {
-    public class EmissionRepository : IBaseRepository<Emission>
+    public class EmissionRepository : IEmissionRepository
     {
         private readonly AppDbContext _dbContext;
 

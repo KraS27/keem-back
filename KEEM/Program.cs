@@ -38,7 +38,7 @@ namespace KEEM
 
            
             builder.Services.AddScoped<IBaseRepository<Gdk>, GdkRepository>();
-            builder.Services.AddScoped<IBaseRepository<Emission>, EmissionRepository>();
+            builder.Services.AddScoped<IEmissionRepository, EmissionRepository>();
             builder.Services.AddScoped<IBaseRepository<Poi>, PoiRepository>();
             builder.Services.AddScoped<IBaseRepository<User> , UserRepository>();
             builder.Services.AddScoped<IBaseRepository<Element> , ElementRepository>();
